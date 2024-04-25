@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <!-- Give product a unique ID per platform -->
+    <?if $(var.Platform) = x64 ?>
+        <?if $(var.Configuration) = DEV ?>
+            <?define ProductCode = "{DFC6749C-6828-4051-8CC9-E18E13C77020}" ?>
+        <?elseif $(var.Configuration) = PROD ?>
+            <?define ProductCode = "{04D3DD70-D4AD-443D-89A4-E8BCB9D7BFE8}" ?>
+        <?endif?>
+    <?else?>
+        <?if $(var.Configuration) = DEV ?>
+            <?define ProductCode = "{C4483A8D-B253-4057-8EE3-62815F3F88F3}" ?>
+        <?elseif $(var.Configuration) = PROD ?>
+            <?define ProductCode = "{EB41BC3A-20FC-4455-905D-315EE2E388CC}" ?>
+        <?endif?>
+    <?endif?>
+
+    <!-- Fixed upgrade Id -->
+    <?define UpgradeCode = {0C375AA6-29BB-4064-A9B7-CE34C66C4600} ?>
+
+    <!-- Define main product -->
+    <Product Id="$(var.ProductCode)"
+             Name="!(loc.ProductName_$(var.Platform))_$(var.Configuration)"
+             Language="!(loc.Language)"
+             Version="$(var.BuildVersion)"
+             Manufacturer="!(loc.Company)"
+             UpgradeCode="$(var.UpgradeCode)">
+
+        <!-- Provide package details -->
+        <Package
+            InstallerVersion="200"
+            Compressed="yes"
+            InstallScope="perMachine"
+            Platform="$(var.Platform)"
+            Manufacturer="!(loc.Company)"
+            Description="!(loc.Description)"
+            Keywords="!(loc.Keywords)"
+            Comments="!(loc.Comments)"
+            Languages="!(loc.Language)"
+            />
+
+        <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeErrorMessage)" />
+
+        <MediaTemplate
+            EmbedCab="yes"
+            />
+
+        <!-- Define main app icon -->
+        <Icon Id="icon.ico" SourceFile="$(var.ConsoleApp1.ProjectDir)\app.ico" />
+
+        <!-- Use the icon.ico icon for this installer (shows up in Add/Remove programs) -->
+        <Property Id="ARPPRODUCTICON">icon.ico</Property>
+        <!-- Help/Support website (shows in Add/Remove programs) -->
+        <Property Id="ARPURLINFOABOUT">https://w3schools.com</Property>
+
+        <!-- Create a basic UI for the installer -->
+        <UIRef Id="WixUI_Minimal" />
+        <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\Assets\License.rtf" />
+        <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)\Assets\Background.bmp" />
+        <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)\Assets\Banner.bmp" />
+        
+
+        <!-- Define components, shortcuts, files etc... for installer -->
+        <Feature Id="ProductFeature" Title="ConsoleApp" Level="1">
+
+            <?if $(var.Configuration) = DEV ?>
+                <ComponentGroupRef Id="ProductComponentsDEV" />
+            <?else?>
+                <ComponentGroupRef Id="ProductComponentsPROD" />
+            <?endif?>
+            
+            <ComponentGroupRef Id="PublishedComponents" />
+
+        </Feature>
+
+
+    </Product>
+
+
+
+</Wix>

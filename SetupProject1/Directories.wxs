@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            
+
+            <?if $(var.Platform) = x64 ?>
+                <?if $(var.Configuration) = DEV ?>
+
+                    <!-- Start Menu -->
+                    <Directory Id="ProgramMenuFolder">
+                        <Directory Id="InstallProgramMenuFolder" Name="!(loc.ProductNameFolder)_DEV64" />
+                    </Directory>
+            
+                    <Directory Id="ProgramFiles64Folder">
+                        <Directory Id="INSTALLFOLDER" Name="!(loc.ProductNameFolder)_DEV64" />
+                    </Directory>
+            
+                <?elseif $(var.Configuration) = PROD ?>
+
+                    <!-- Start Menu -->
+                    <Directory Id="ProgramMenuFolder">
+                        <Directory Id="InstallProgramMenuFolder" Name="!(loc.ProductNameFolder)_PROD64" />
+                    </Directory>
+
+                    <Directory Id="ProgramFiles64Folder">
+                        <Directory Id="INSTALLFOLDER" Name="!(loc.ProductNameFolder)_PROD64" />
+                    </Directory>            
+            
+                <?endif?>
+            <?else?>
+                <?if $(var.Configuration) = DEV ?>
+
+                    <!-- Start Menu -->
+                    <Directory Id="ProgramMenuFolder">
+                        <Directory Id="InstallProgramMenuFolder" Name="!(loc.ProductNameFolder)_DEV32" />
+                    </Directory>
+
+                    <Directory Id="ProgramFiles64Folder">
+                        <Directory Id="INSTALLFOLDER" Name="!(loc.ProductNameFolder)_DEV32" />
+                    </Directory>
+            
+                <?elseif $(var.Configuration) = PROD ?>
+
+                    <!-- Start Menu -->
+                    <Directory Id="ProgramMenuFolder">
+                        <Directory Id="InstallProgramMenuFolder" Name="!(loc.ProductNameFolder)_PROD32" />
+                    </Directory>
+
+                    <Directory Id="ProgramFiles64Folder">
+                        <Directory Id="INSTALLFOLDER" Name="!(loc.ProductNameFolder)_PROD32" />
+                    </Directory>
+
+                <?endif?>
+            <?endif?>
+
+        </Directory>
+    </Fragment>
+
+</Wix>

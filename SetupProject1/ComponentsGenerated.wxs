@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="cmp69FC7E797E7A42ADEABAA52BB0D649EB" Guid="{0BBBB20D-A5FA-4132-ACC1-B2AA4D5031A6}">
+                <File Id="fil34AE41B3B7D428012678EC05668B544E" KeyPath="yes" Source="$(var.BasePath)\ConsoleApp1.deps.json" />
+            </Component>
+            <Component Id="cmp7D50C7F3B1C9E47C379F2A0E7BC5EA87" Guid="{AA1C1238-8953-4139-8C19-A63D72D845C3}">
+                <File Id="fil7641100670F0729C8F9FEB2952B1102C" KeyPath="yes" Source="$(var.BasePath)\ConsoleApp1.dll" />
+            </Component>
+            <Component Id="cmp6F4999A46DD0D0FE97F8A39F33D7D881" Guid="{7A8A0487-C9C0-4B9C-9FD5-DD5A52D31DF1}">
+                <File Id="fil658DA5E2D6C862475E4158F7A3415C23" KeyPath="yes" Source="$(var.BasePath)\ConsoleApp1.exe" />
+            </Component>
+            <Component Id="cmp97978CB54365D4CFB083DF5755F6BB7B" Guid="{355B06D2-6E3E-40B3-8A78-82B9C41FA909}">
+                <File Id="fil79D9666756F44BD5DC9D881354C57984" KeyPath="yes" Source="$(var.BasePath)\ConsoleApp1.pdb" />
+            </Component>
+            <Component Id="cmp81B9272962CE4070EC0453D0A70185F4" Guid="{2CE8E8A4-4092-42D9-B1C6-38A51FA60FFD}">
+                <File Id="fil4C1110294016C6D62AE24CBAB3D385D5" KeyPath="yes" Source="$(var.BasePath)\ConsoleApp1.runtimeconfig.json" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="PublishedComponents">
+            <ComponentRef Id="cmp69FC7E797E7A42ADEABAA52BB0D649EB" />
+            <ComponentRef Id="cmp7D50C7F3B1C9E47C379F2A0E7BC5EA87" />
+            <ComponentRef Id="cmp6F4999A46DD0D0FE97F8A39F33D7D881" />
+            <ComponentRef Id="cmp97978CB54365D4CFB083DF5755F6BB7B" />
+            <ComponentRef Id="cmp81B9272962CE4070EC0453D0A70185F4" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

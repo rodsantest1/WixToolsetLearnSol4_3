@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <ComponentGroup Id="ProductComponentsDEV">
+
+            <ComponentRef Id="MainAppShortcutDEV" />
+
+        </ComponentGroup>
+
+
+        <DirectoryRef Id="INSTALLFOLDER" FileSource="..\ConsoleApp1\bin\$(var.Configuration)\net8.0\win-$(var.Platform)\publish">
+
+            <Component Id="MainAppShortcutDEV" Guid="{780F5C52-2C3D-4553-A559-D02C5D4D2FDB}">
+
+                <Shortcut Id="MainAppShortcutDEV"
+                          Name="!(loc.ProductName_$(var.Platform))_DEV"
+                          Target="[INSTALLFOLDER]\ConsoleApp1.exe"
+                          Directory="InstallProgramMenuFolder"
+                          WorkingDirectory="INSTALLFOLDER"
+                          Icon="icon.ico"
+                          />
+
+                <!-- Our unique key for this component/shortcut -->
+                <RegistryValue Id="RegShortcutKey" Root="HKCU" Key="SOFTWARE\!(loc.ProductNameFolder)_DEV" Name="Shortcut" Value="1" Type="integer" KeyPath="yes" />
+
+                <!-- Remove start menu items -->
+                <RemoveFolder Id="RemoveStartMenu" Directory="InstallProgramMenuFolder" On="uninstall" />
+
+            </Component>
+
+        </DirectoryRef>
+
+    </Fragment>
+</Wix>
